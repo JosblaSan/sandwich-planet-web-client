@@ -1,0 +1,92 @@
+<mat-toolbar class="navbar" [@navAnimation]="navbarState">
+    <div class="container">
+      <div class="navbar-brand">
+        <a routerLink="/" class="logo">
+          <img src="images/logo-sandwich-planet-horizontal.png" alt="Sándwich Logo" class="logo-image">
+        </a>
+        <button mat-icon-button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+          <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+      </div>
+  
+      <div class="navbar-content" [class.mobile-open]="isMobileMenuOpen">
+    <div class="navbar-links">
+      <a mat-button routerLink="/menu" routerLinkActive="active-link"
+         (mouseenter)="setActiveLink('menu')" (mouseleave)="clearActiveLink()"
+         [class.hovered]="activeLink === 'menu'">
+        <div class="link-content">
+          <span>Menú</span>
+          <div class="link-image" *ngIf="activeLink === 'menu'">
+            <img src="assets/images/menu-preview.jpg" alt="Menú Preview">
+          </div>
+        </div>
+      </a>
+      
+      <a mat-button routerLink="/locations" routerLinkActive="active-link"
+         (mouseenter)="setActiveLink('locations')" (mouseleave)="clearActiveLink()"
+         [class.hovered]="activeLink === 'locations'">
+        <div class="link-content">
+          <span>Ubicaciones</span>
+          <div class="link-image" *ngIf="activeLink === 'locations'">
+            <img src="assets/images/locations-preview.jpg" alt="Ubicaciones Preview">
+          </div>
+        </div>
+      </a>
+      
+      <a mat-button routerLink="/about" routerLinkActive="active-link"
+         (mouseenter)="setActiveLink('about')" (mouseleave)="clearActiveLink()"
+         [class.hovered]="activeLink === 'about'">
+        <div class="link-content">
+          <span>Nosotros</span>
+          <div class="link-image" *ngIf="activeLink === 'about'">
+            <img src="assets/images/about-preview.jpg" alt="Nosotros Preview">
+          </div>
+        </div>
+      </a>
+    </div>
+  
+    <div class="navbar-actions">
+      <button 
+        *ngIf="!isLoggedIn" 
+        mat-button 
+        class="login-button" 
+        (click)="login()">
+        Iniciar Sesión
+      </button>
+      
+      <button 
+        mat-icon-button 
+        [matMenuTriggerFor]="profileMenu" 
+        *ngIf="isLoggedIn"
+        class="profile-button">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      
+      <mat-menu #profileMenu="matMenu" xPosition="before" class="profile-menu">
+        <div class="profile-header">
+          <mat-icon class="profile-avatar">account_circle</mat-icon>
+          <div class="profile-info">
+            <p class="profile-name">{{ username }}</p>
+            <p class="profile-email">XXXXXX</p>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/profile">
+          <mat-icon>person</mat-icon>
+          <span>Mi Perfil</span>
+        </button>
+        <button mat-menu-item routerLink="/orders">
+          <mat-icon>receipt</mat-icon>
+          <span>Mis Pedidos</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+    </div>
+  </mat-toolbar>
+  

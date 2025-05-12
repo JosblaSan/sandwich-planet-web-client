@@ -1,0 +1,291 @@
+@use 'sass:color';
+// Variables
+$navbar-height: 64px;
+$navbar-height-mobile: 56px;
+$primary-color: #ff6b35;
+$text-color: #333;
+$hover-color: #f5f5f7;
+$transition-speed: 0.3s;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 767px) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (min-width: 768px) and (max-width: 1023px) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: 1024px) { @content; }
+  }
+}
+
+// Navbar Styles
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  height: $navbar-height;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform $transition-speed ease, background-color $transition-speed ease;
+
+  @include responsive(mobile) {
+    height: $navbar-height-mobile;
+  }
+}
+
+.container {
+  @include flex-center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 100%;
+
+  @include responsive(mobile) {
+    flex-wrap: wrap;
+  }
+}
+
+// Brand/Logo
+.navbar-brand {
+  @include flex-center;
+  justify-content: space-between;
+  height: 100%;
+  z-index: 10;
+  
+  @include responsive(mobile) {
+    width: 100%;
+  }
+
+  .logo {
+    text-decoration: none;
+    @include flex-center;
+    
+    .logo-image {
+      height: 135px;
+      margin-right: 8px;
+      transition: transform $transition-speed ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $text-color;
+      letter-spacing: -0.5px;
+    }
+  }
+}
+
+// Mobile Menu Toggle
+.mobile-menu-toggle {
+  display: none;
+  
+  @include responsive(mobile) {
+    display: flex;
+  }
+}
+
+// Navbar Content (Links + Actions)
+.navbar-content {
+  @include flex-center;
+  justify-content: space-between;
+  flex: 1;
+  height: 100%;
+  
+  @include responsive(mobile) {
+    position: absolute;
+    top: $navbar-height-mobile;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    height: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: transform $transition-speed ease, opacity $transition-speed ease;
+    
+    &.mobile-open {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+}
+
+// Navigation Links
+.navbar-links {
+  @include flex-center;
+  gap: 8px;
+  height: 100%;
+  
+  @include responsive(mobile) {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 16px;
+  }
+  
+  a {
+    color: $text-color;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    height: 100%;
+    position: relative;
+    @include flex-center;
+    transition: color $transition-speed ease, background-color $transition-speed ease;
+    
+    @include responsive(mobile) {
+      width: 100%;
+      justify-content: center;
+      height: 48px;
+    }
+    
+    &:hover, &.active-link {
+      color: $primary-color;
+      background-color: rgba($primary-color, 0.05);
+    }
+    
+    &.hovered {
+      color: $primary-color;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: $primary-color;
+      transition: width $transition-speed ease, left $transition-speed ease;
+    }
+    
+    &:hover::after, &.active-link::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+  .link-content {
+    position: relative;
+    @include flex-center;
+    height: 100%;
+    
+    .link-image {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      
+      @include responsive(mobile) {
+        display: none;
+      }
+      
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// Auth Buttons
+.navbar-actions {
+  @include flex-center;
+  
+  @include responsive(mobile) {
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
+  .login-button {
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    border-radius: 20px;
+    padding: 0 16px;
+    height: 36px;
+    background-color: $primary-color;
+    color: white;
+    transition: background-color $transition-speed ease, transform $transition-speed ease;
+    
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -5%);
+      transform: translateY(-2px);
+    }
+    
+    @include responsive(mobile) {
+      width: 100%;
+    }
+  }
+  
+  .profile-button {
+    color: $text-color;
+    transition: transform $transition-speed ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Profile Menu
+.profile-menu {
+  min-width: 240px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  
+  .profile-avatar {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 12px;
+    color: $text-color;
+  }
+  
+  .profile-info {
+    .profile-name {
+      font-weight: 500;
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    .profile-email {
+      margin: 0;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+// Active Link Styles
+.active-link {
+  font-weight: 500 !important;
+}
