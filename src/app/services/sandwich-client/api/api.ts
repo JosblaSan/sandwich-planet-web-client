@@ -1,0 +1,11 @@
+export * from './appController.service';
+import { AppControllerService } from './appController.service';
+export * from './ingredienteController.service';
+import { IngredienteControllerService } from './ingredienteController.service';
+export * from './origenController.service';
+import { OrigenControllerService } from './origenController.service';
+export * from './sandwichController.service';
+import { SandwichControllerService } from './sandwichController.service';
+export * from './tipoController.service';
+import { TipoControllerService } from './tipoController.service';
+export const APIS = [AppControllerService, IngredienteControllerService, OrigenControllerService, SandwichControllerService, TipoControllerService];
