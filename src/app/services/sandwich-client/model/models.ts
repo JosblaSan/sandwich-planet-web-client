@@ -1,4 +1,5 @@
 export * from './ingredienteDTo';
+export * from './item';
 export * from './message';
 export * from './metadata';
 export * from './origenDTO';

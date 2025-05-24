@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,10 +6,21 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition } from "@angular/animations"
+import { MatDialog } from '@angular/material/dialog';
+import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../../services/cart/cart.service';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatToolbarModule, MatIconModule, MatMenuModule, MatDividerModule, CommonModule],
+  imports: [
+    MatToolbarModule, 
+    MatIconModule, 
+    MatMenuModule, 
+    MatDividerModule, 
+    CommonModule,
+    MatBadgeModule,
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   animations: [
@@ -53,7 +64,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
 })
 
 export class NavbarComponent {
-  constructor(public auth: AuthService) {}
+  private dialog = inject(MatDialog)
+  constructor(public auth: AuthService, public cartService: CartService) {}
 
   isLoggedIn = false;
   isMobileMenuOpen = false;
@@ -61,6 +73,7 @@ export class NavbarComponent {
   navbarState = "active";
   activeLink: string | null = null;
   username: string | null = null;
+  cartItemCount = computed(() => this.cartService.getTotalQuantity())
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isLoggedIn;
@@ -105,6 +118,14 @@ export class NavbarComponent {
 
   logout(): void {
     this.auth.logout();
+  }
+
+  openCart() {
+    this.dialog.open(CartComponent, {
+      width: "800px",
+      maxWidth: "90vw",
+      autoFocus: false,
+    })
   }
   
 }

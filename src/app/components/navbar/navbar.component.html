@@ -75,7 +75,11 @@
           <mat-icon>person</mat-icon>
           <span>Mi Perfil</span>
         </button>
-        <button mat-menu-item routerLink="/orders">
+        <button mat-menu-item
+          [matBadge]="cartItemCount()"
+          [matBadgeHidden]="cartItemCount() === 0"
+          matBadgeColor="accent"
+         (click)="openCart()">
           <mat-icon>receipt</mat-icon>
           <span>Mis Pedidos</span>
         </button>
