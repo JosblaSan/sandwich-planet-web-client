@@ -1,0 +1,220 @@
+/* Variables SCSS para fácil personalización */
+$primary-color: #ff6f00; // Un naranja vibrante
+$secondary-color: #4a4a4a; // Gris oscuro para texto
+$background-light: #f7f7f7; // Fondo claro
+$card-background: #ffffff; // Fondo de tarjeta
+$border-color: #e0e0e0; // Color de borde suave
+$text-light: #666; // Texto secundario
+$error-color: #d32f2f; // Rojo para errores
+
+/* Colores para atributos */
+$vegetarian-color: #4caf50; // Verde
+$vegan-color: #8bc34a; // Verde claro
+$gluten-free-color: #ffc107; // Amarillo
+$spicy-color: #f44336; // Rojo
+
+/* Mixins (opcional, para reutilizar estilos) */
+@mixin card-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sandwich-container {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  padding: 20px;
+  background-color: $background-light;
+  min-height: 100vh; // Para que ocupe toda la altura de la vista
+  color: $secondary-color;
+
+  h2 {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-message {
+    color: $error-color;
+    background-color: lighten($error-color, 40%);
+    border: 1px solid $error-color;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    max-width: 600px;
+  }
+
+  .loading-message, .empty-message {
+    text-align: center;
+    color: $text-light;
+    font-style: italic;
+    padding: 20px;
+    font-size: 1.1em;
+  }
+}
+
+.sandwich-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Responsivo para 1, 2 o más columnas
+  gap: 30px; // Espacio entre las tarjetas
+  max-width: 1200px;
+  margin: 0 auto; // Centrar el grid
+  padding: 20px 0;
+}
+
+.sandwich-card {
+  background-color: $card-background;
+  border-radius: 12px;
+  overflow: hidden;
+  @include card-shadow; // Aplica la sombra
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-8px); // Efecto al pasar el ratón
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .sandwich-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover; // Para que la imagen cubra el espacio sin distorsionarse
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    color: $primary-color;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+
+  .sandwich-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: $secondary-color;
+    margin-bottom: 15px;
+  }
+
+  .sandwich-details {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+    color: $text-light;
+
+    p {
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+
+    strong {
+      color: $secondary-color;
+    }
+  }
+
+  .sandwich-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 8px;
+
+    .attribute {
+      font-size: 0.85em;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      &.vegetarian { background-color: $vegetarian-color; }
+      &.vegan { background-color: $vegan-color; }
+      &.gluten-free { background-color: $gluten-free-color; }
+      &.spicy { background-color: $spicy-color; }
+    }
+  }
+
+  .sandwich-calories {
+    font-size: 0.9em;
+    color: $text-light;
+    margin-top: 10px;
+  }
+
+  .sandwich-availability {
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #cccccc; // Gris por defecto para agotado
+    color: #333333;
+
+    &.available {
+      background-color: #c8e6c9; // Verde claro
+      color: #2e7d32; // Verde oscuro
+    }
+  }
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+  .sandwich-container {
+    padding: 15px;
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+  }
+
+  .sandwich-grid {
+    grid-template-columns: 1fr; // Una columna en pantallas pequeñas
+    padding: 10px;
+  }
+
+  .sandwich-card {
+    padding: 20px;
+  }
+
+  .sandwich-image {
+    max-height: 180px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  .sandwich-price {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .sandwich-container {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  .sandwich-card {
+    padding: 15px;
+  }
+
+  .sandwich-attributes .attribute {
+    font-size: 0.75em;
+    padding: 5px 10px;
+  }
+}

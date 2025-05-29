@@ -1,0 +1,125 @@
+  [
+  {
+    "id": 1,
+    "nombre": "Club Sandwich",
+    "origen": "Estados Unidos",
+    "tipo": "Clásico",
+    "ingredientes": [
+      "Pan de molde tostado",
+      "Pechuga de pollo",
+      "Tocino crujiente",
+      "Lechuga",
+      "Tomate",
+      "Mayonesa",
+      "Huevo duro (opcional)"
+    ],
+    "atributos": {
+      "vegetariano": false,
+      "vegano": false,
+      "sin_gluten": false,
+      "picante": false
+    },
+    "calorias_aproximadas": 550,
+    "precio": 6.50,
+    "disponible": true,
+    "imagen_url": "assets/sandwich.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Sándwich Vegetariano Mediterráneo",
+    "origen": "Inspiración Mediterránea",
+    "tipo": "Saludable",
+    "ingredientes": [
+      "Pan integral",
+      "Hummus",
+      "Pepino",
+      "Pimientos asados",
+      "Aceitunas negras",
+      "Espinacas frescas",
+      "Queso feta (opcional)"
+    ],
+    "atributos": {
+      "vegetariano": true,
+      "vegano": false,
+      "sin_gluten": false,
+      "picante": false
+    },
+    "calorias_aproximadas": 400,
+    "precio": 5.80,
+    "disponible": true,
+    "imagen_url": "https://cdn.sandwichplanet.com/img/mediterraneo.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Sándwich de Pastrami",
+    "origen": "Nueva York, Estados Unidos",
+    "tipo": "Gourmet",
+    "ingredientes": [
+      "Pan de centeno",
+      "Pastrami ahumado",
+      "Mostaza dijon",
+      "Pepinos encurtidos",
+      "Queso suizo"
+    ],
+    "atributos": {
+      "vegetariano": false,
+      "vegano": false,
+      "sin_gluten": false,
+      "picante": false
+    },
+    "calorias_aproximadas": 680,
+    "precio": 8.90,
+    "disponible": true,
+    "imagen_url": "https://cdn.sandwichplanet.com/img/pastrami.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Sándwich de Atún Picante",
+    "origen": "Adaptación Internacional",
+    "tipo": "Moderno",
+    "ingredientes": [
+      "Pan de trigo",
+      "Atún enlatado",
+      "Mayonesa",
+      "Cebolla roja",
+      "Apio",
+      "Jalapeños (opcional)",
+      "Cilantro"
+    ],
+    "atributos": {
+      "vegetariano": false,
+      "vegano": false,
+      "sin_gluten": false,
+      "picante": true
+    },
+    "calorias_aproximadas": 480,
+    "precio": 6.20,
+    "disponible": true,
+    "imagen_url": "https://cdn.sandwichplanet.com/img/atun_picante.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Sándwich de Palta y Huevo",
+    "origen": "Chile",
+    "tipo": "Casero",
+    "ingredientes": [
+      "Pan amasado",
+      "Palta (aguacate) molida",
+      "Huevo duro en rodajas",
+      "Tomate",
+      "Sal",
+      "Pimienta"
+    ],
+    "atributos": {
+      "vegetariano": true,
+      "vegano": false,
+      "sin_gluten": false,
+      "picante": false
+    },
+    "calorias_aproximadas": 450,
+    "precio": 5.00,
+    "disponible": true,
+    "imagen_url": "https://cdn.sandwichplanet.com/img/palta_huevo.jpg"
+  }
+]
+    

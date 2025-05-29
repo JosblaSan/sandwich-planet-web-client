@@ -1,0 +1,34 @@
+
+<div class="sandwich-container">
+  <h2>Nuestra Selección de Sándwiches</h2>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <div *ngIf="sandwiches.length > 0; else loadingOrEmpty" class="sandwich-grid">
+    <div *ngFor="let sandwich of sandwiches" class="sandwich-card">
+      <img [src]="sandwich.imagen_url" [alt]="sandwich.nombre" class="sandwich-image">
+      <h3>{{ sandwich.nombre }}</h3>
+      <p class="sandwich-price">Precio: ${{ sandwich.precio | number:'1.2-2' }}</p>
+      <div class="sandwich-details">
+        <p><strong>Origen:</strong> {{ sandwich.origen }}</p>
+        <p><strong>Tipo:</strong> {{ sandwich.tipo }}</p>
+        <p><strong>Ingredientes:</strong> {{ sandwich.ingredientes.join(', ') }}</p>
+        <div class="sandwich-attributes">
+          <span *ngIf="sandwich.atributos.vegetariano" class="attribute vegetarian">Vegetariano</span>
+          <span *ngIf="sandwich.atributos.vegano" class="attribute vegan">Vegano</span>
+          <span *ngIf="sandwich.atributos.sin_gluten" class="attribute gluten-free">Sin Gluten</span>
+          <span *ngIf="sandwich.atributos.picante" class="attribute spicy">Picante</span>
+        </div>
+      </div>
+      <p class="sandwich-calories">Aprox. {{ sandwich.calorias_aproximadas }} calorías</p>
+      <span class="sandwich-availability" [class.available]="sandwich.disponible">
+        {{ sandwich.disponible ? 'Disponible' : 'Agotado' }}
+      </span>
+    </div>
+  </div>
+
+  <ng-template #loadingOrEmpty>
+    <p *ngIf="!errorMessage" class="loading-message">Cargando sándwiches...</p>
+    <p *ngIf="!errorMessage && sandwiches.length === 0" class="empty-message">No se encontraron sándwiches.</p>
+  </ng-template>
+</div>
