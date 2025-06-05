@@ -1,8 +1,13 @@
-<div class="container">
-    <h1 class="page-title">Nuestros Sándwiches</h1>
+<div class="sandwich-container">
+  <h2>Nuestra Selección de Sándwiches</h2>
 
-    <div class="products-grid">
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <div class="sandwich-grid">
         <app-product-card *ngFor="let sandwich of sandwiches" [sandwich]="sandwich">
         </app-product-card>
     </div>
+    <ng-template #loadingOrEmpty>
+        <p *ngIf="!errorMessage" class="loading-message">Cargando sándwiches...</p>
+    </ng-template>
 </div>

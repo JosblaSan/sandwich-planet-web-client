@@ -1,52 +1,18 @@
-<mat-card class="product-card">
-    <!-- Imagen del producto -->
-    <div class="image-container" [class.unavailable]="sandwich!.disponible === false">
-        <img *ngIf="sandwich!.imagenUrl" mat-card-image [src]="sandwich!.imagenUrl"
-            [alt]="sandwich!.nombre || 'Sandwich'" />
-        <div *ngIf="!sandwich!.imagenUrl" class="no-image">
-            <mat-icon>no_photography</mat-icon>
-        </div>
 
-        <!-- Indicador de disponibilidad -->
-        <div *ngIf="sandwich!.disponible !== undefined" class="availability-indicator">
-            <mat-icon [matTooltip]="sandwich!.disponible ? 'Disponible' : 'No disponible'"
-                [color]="sandwich!.disponible ? 'primary' : 'warn'">
-                {{ sandwich!.disponible ? 'check_circle' : 'cancel' }}
-            </mat-icon>
-        </div>
+<div class="sandwich-card">
+    <img [src]="sandwich!.imagenUrl" [alt]="sandwich!.nombre" class="sandwich-image">
+    <h3>{{ sandwich!.nombre }}</h3>
+    <p class="sandwich-price">Precio: ${{ sandwich!.precio | number:'1.2-2' }}</p>
+    <div class="sandwich-details">
+        <p><strong>Origen:</strong> {{ sandwich!.origen }}</p>
+        <p><strong>Tipo:</strong> {{ sandwich!.tipo }}</p>
+        <p><strong>Descripción:</strong> {{ sandwich!.descripcion }}</p>
     </div>
-
-    <mat-card-content>
-        <!-- Encabezado con nombre y precio -->
-        <div class="header">
-            <h2 class="title">{{ sandwich!.nombre || 'Sin nombre' }}</h2>
-            <span *ngIf="sandwich!.precio !== undefined" class="price">
-                {{ sandwich!.precio | currency:'$':'symbol':'1.2-2' }}
-            </span>
-        </div>
-
-        <!-- Etiquetas de tipo y origen -->
-        <div class="chips-container" *ngIf="sandwich!.tipo || sandwich!.origen">
-            <mat-chip-set>
-                <mat-chip *ngIf="sandwich!.tipo" color="primary" [highlighted]="false">
-                    {{ sandwich!.tipo }}
-                </mat-chip>
-                <mat-chip *ngIf="sandwich!.origen" color="accent" [highlighted]="false">
-                    {{ sandwich!.origen }}
-                </mat-chip>
-            </mat-chip-set>
-        </div>
-
-        <!-- Descripción -->
-        <p *ngIf="sandwich!.descripcion" class="description">
-            {{ sandwich!.descripcion }}
-        </p>
-    </mat-card-content>
-
-    <mat-card-actions>
-        <button mat-raised-button color="primary" class="add-button" (click)="addToCart()">
-            <mat-icon>add_shopping_cart</mat-icon>
-            Añadir al carrito
-        </button>
-    </mat-card-actions>
-</mat-card>
+    <span class="sandwich-availability" [class.available]="sandwich!.disponible">
+        {{ sandwich!.disponible ? 'Disponible' : 'Agotado' }}
+    </span>
+    <button mat-raised-button color="primary" class="add-button" (click)="addToCart()">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Añadir al carrito
+    </button>
+</div>

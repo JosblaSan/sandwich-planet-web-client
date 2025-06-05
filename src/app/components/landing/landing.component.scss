@@ -1,18 +1,52 @@
-.container {
-    max-width: 1200px;
-    margin: 66px auto 0 auto;
-    padding: 24px;
+/* Variables SCSS para fácil personalización */
+$primary-color: #ff6f00; // Un naranja vibrante
+$secondary-color: #4a4a4a; // Gris oscuro para texto
+$background-light: #f7f7f7; // Fondo claro
+$text-light: #666; // Texto secundario
+$error-color: #d32f2f; // Rojo para errores
+
+.sandwich-container {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  padding: 20px;
+  background-color: $background-light;
+  min-height: 100vh; // Para que ocupe toda la altura de la vista
+  color: $secondary-color;
+
+  h2 {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-message {
+    color: $error-color;
+    background-color: lighten($error-color, 40%);
+    border: 1px solid $error-color;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    max-width: 600px;
+  }
+
+  .loading-message, .empty-message {
+    text-align: center;
+    color: $text-light;
+    font-style: italic;
+    padding: 20px;
+    font-size: 1.1em;
+  }
 }
 
-.page-title {
-    margin-bottom: 24px;
-    font-size: 28px;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+.sandwich-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Responsivo para 1, 2 o más columnas
+  gap: 30px; // Espacio entre las tarjetas
+  max-width: 1200px;
+  margin: 0 auto; // Centrar el grid
+  padding: 20px 0;
 }

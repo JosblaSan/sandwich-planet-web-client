@@ -47,6 +47,17 @@
   
     <div class="navbar-actions">
       <button 
+        mat-icon-button 
+        class="profile-button"
+        *ngIf="!isLoggedIn"
+        [matBadge]="cartItemCount()"
+        [matBadgeHidden]="cartItemCount() === 0"
+        matBadgeColor="accent"
+        (click)="openCart()">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+
+      <button 
         *ngIf="!isLoggedIn" 
         mat-button 
         class="login-button" 

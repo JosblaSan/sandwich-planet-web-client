@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class LandingComponent implements OnInit {
 
   sandwiches: SandwichResumenDTO[] = [];
+  errorMessage: string | null = null;
 
   constructor(private sandwichService: SandwichControllerService){
 

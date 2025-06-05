@@ -245,6 +245,7 @@ $transition-speed: 0.3s;
   .profile-button {
     color: $text-color;
     transition: transform $transition-speed ease;
+    margin: auto 12px auto 12px;
     
     &:hover {
       transform: scale(1.1);
