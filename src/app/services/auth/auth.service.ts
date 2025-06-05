@@ -45,4 +45,8 @@ export class AuthService {
         console.log(error)
       });
   }
+
+  getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
 }

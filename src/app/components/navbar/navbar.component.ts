@@ -76,6 +76,7 @@ export class NavbarComponent {
   cartItemCount = computed(() => this.cartService.getTotalQuantity())
 
   ngOnInit(): void {
+    if (!this.auth.identityClaims) return
     this.isLoggedIn = this.auth.isLoggedIn;
     this.username = this.auth.identityClaims['sub'];
   }

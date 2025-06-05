@@ -14,13 +14,28 @@ export class CallbackComponent {
   ngOnInit() {
     const _this = this;
     this.auth.loadDiscoveryDocumentAndTryLogin(() => {
-      if (_this.auth.isLoggedIn) {
-        // Redirige a la ruta protegida o página principal
-        this.router.navigate(['/dashboard']); // Cambia '/dashboard' por tu ruta deseada
-      } else {
+      if (!_this.auth.isLoggedIn) {
         // Si falla, redirige al login
-        window.location.href = "http://localhost:9000/login"
+        window.location.href = "http://localhost:9000/login";
+        return;
       }
-    });
+        const accessToken = _this.auth.getAccessToken();
+        if (!accessToken) {
+          console.error('No hay access token');
+          return;
+        }
+        // Decodifica el payload del Access Token (sin verificar firma)
+        const payloadBase64 = accessToken.split('.')[1];
+        const payloadJson = atob(payloadBase64);
+        const payload = JSON.parse(payloadJson);
+        // Redirige a la ruta protegida o página principal
+        if (payload.roles.includes('ROLE_read')) {
+          this.router.navigate(['/']); // redirige a la página principal
+          return;
+        }
+
+        this.router.navigate(['/dashboard']); // si el rol no es 'ROLE_read', redirige al dashboard
+      } 
+    );
   }
 }
