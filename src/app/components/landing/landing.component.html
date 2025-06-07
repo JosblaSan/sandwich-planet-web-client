@@ -1,8 +1,7 @@
 <div class="container">
-    <h1 class="page-title">Nuestros Sándwiches</h1>
-
     <div class="products-grid">
         <app-product-card *ngFor="let sandwich of sandwiches" [sandwich]="sandwich">
         </app-product-card>
     </div>
+    <app-sandwich-list></app-sandwich-list>
 </div>
