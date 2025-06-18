@@ -86,6 +86,10 @@
           <mat-icon>person</mat-icon>
           <span>Mi Perfil</span>
         </button>
+         <button mat-menu-item routerLink="/order-history">
+            <mat-icon>history</mat-icon>
+            <span>Historial de Pedidos</span>
+          </button>
         <button mat-menu-item
           [matBadge]="cartItemCount()"
           [matBadgeHidden]="cartItemCount() === 0"

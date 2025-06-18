@@ -1,0 +1,47 @@
+<mat-toolbar>
+</mat-toolbar>
+<mat-toolbar>
+  <span>Historial de Pedidos</span>
+</mat-toolbar>
+
+<div class="order-history-container">
+  <div *ngIf="isLoading" class="loading-message">
+    <mat-icon>hourglass_empty</mat-icon> Cargando historial de pedidos...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error_outline</mat-icon> {{ errorMessage }}
+    <button mat-button color="warn" (click)="loadOrderHistory()">Reintentar</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && orders.length === 0" class="no-orders-message">
+    <mat-icon>info</mat-icon> No tienes pedidos anteriores. ¡Haz tu primer pedido ahora!
+    <button mat-flat-button color="primary" routerLink="/menu">Ir al Menú</button>
+  </div>
+
+  <div class="orders-grid" *ngIf="!isLoading && !errorMessage && orders.length > 0">
+    <mat-card *ngFor="let order of orders" class="order-card">
+      <mat-card-header>
+        <mat-card-title>Pedido #{{ order.id }}</mat-card-title>
+        <mat-card-subtitle>Fecha: {{ order.date | date:'short' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Estado: <strong [ngClass]="'status-' + order.status">{{ order.status }}</strong></p>
+        <p>Total: <strong>{{ order.total | currency:'CLP':'symbol':'1.0-0' }}</strong></p>
+
+        <mat-list dense class="item-list">
+          <div mat-subheader>Artículos:</div>
+          <mat-list-item *ngFor="let item of order.items">
+            <span>{{ item.quantity }}x {{ item.name }}</span>
+            <span class="item-price">{{ item.price | currency:'CLP':'symbol':'1.0-0' }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="primary" (click)="viewOrderDetails(order.id)">
+          Ver Detalles
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

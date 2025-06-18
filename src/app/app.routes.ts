@@ -4,12 +4,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LandingComponent } from './components/landing/landing.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent },
     { path: 'callback', component: CallbackComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'checkout', component: CheckoutComponent },
+    { path: 'order-history', component: OrderHistoryComponent },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' }
 ];

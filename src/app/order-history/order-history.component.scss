@@ -1,0 +1,172 @@
+$primary-color: #ff6600; // Un naranja similar al de tu logo/navbar
+$accent-color: #4CAF50; // Un verde para disponible/éxito
+$warn-color: #f44336;   // Rojo para errores/cancelado
+$text-color-dark: #333;
+$text-color-light: #666;
+$card-border-radius: 8px;
+$shadow-strength: 0.1;
+
+// Contenedor principal de la página de historial
+.order-history-container {
+  padding: 20px;
+  max-width: 1200px; // Un poco más ancho si quieres más columnas
+  margin: 30px auto; // Margen superior para separarse de la navbar
+  font-family: Roboto, sans-serif; // O la fuente que uses en tu app
+}
+
+// Estilos para mensajes de carga, error y sin pedidos
+.loading-message,
+.error-message,
+.no-orders-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.2em;
+  color: $text-color-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; // Espaciado entre elementos
+  background-color: #fff;
+  border-radius: $card-border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, $shadow-strength * 0.5); // Sombra más ligera
+  margin-top: 20px;
+}
+
+.loading-message mat-icon,
+.no-orders-message mat-icon {
+  font-size: 64px; // Ícono más grande
+  color: #999;
+}
+
+.error-message {
+  color: $warn-color;
+  mat-icon {
+    font-size: 64px;
+    color: $warn-color;
+  }
+}
+
+.no-orders-message {
+  mat-icon {
+    color: $accent-color; // O un color más neutro
+  }
+  mat-card-actions {
+    justify-content: center; // Centra el botón
+  }
+}
+
+// Estilos para la cuadrícula de pedidos
+.orders-grid {
+  display: grid;
+  // Ajusta estos valores para cambiar el número de columnas y el espaciado
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px; // Espaciado entre las tarjetas
+  padding: 10px 0; // Pequeño padding vertical
+}
+
+// Estilo para cada tarjeta de pedido
+.order-card {
+  border-radius: $card-border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, $shadow-strength); // Sombra similar a la de los sándwiches
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer; // Indica que se puede hacer clic para ver detalles
+
+  &:hover {
+    transform: translateY(-5px); // Pequeño efecto hover
+    box-shadow: 0 8px 16px rgba(0, 0, 0, $shadow-strength * 1.5);
+  }
+
+  mat-card-header {
+    padding-bottom: 0; // Ajusta el espaciado
+  }
+
+  mat-card-title {
+    font-size: 1.4em; // Título más grande para el ID del pedido
+    font-weight: 600;
+    color: $primary-color; // Color principal para el ID del pedido
+    margin-bottom: 5px;
+  }
+
+  mat-card-subtitle {
+    font-size: 0.9em;
+    color: $text-color-light;
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    padding-top: 0;
+    border-top: 1px solid #eee; // Línea sutil para separar encabezado
+    margin-top: 10px; // Espacio entre línea y contenido
+
+    p {
+      margin-bottom: 8px; // Espacio entre párrafos
+      font-size: 1em;
+      color: $text-color-dark;
+
+      strong {
+        color: $text-color-dark; // Color más oscuro para valores importantes
+      }
+    }
+
+    // Estilo para el estado del pedido
+    .order-status {
+      font-weight: bold;
+      &.status-Completado {
+        color: $accent-color;
+      }
+      &.status-Pendiente, &.status-EnProceso {
+        color: #FFC107; // Amarillo/Naranja para pendientes/en proceso
+      }
+      &.status-Cancelado {
+        color: $warn-color;
+      }
+    }
+
+    // Lista de artículos
+    .item-list {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px dashed #eee; // Línea punteada para artículos
+
+      .mat-list-base { // Estilo base de mat-list
+        padding: 0; // Elimina padding por defecto si es necesario
+      }
+
+      .mat-list-item {
+        height: auto; // Permite que el contenido determine la altura
+        padding: 8px 0; // Padding vertical para cada artículo
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.95em;
+        color: $text-color-dark;
+      }
+
+      .item-price {
+        font-weight: 500;
+        color: $text-color-dark;
+        margin-left: 15px; // Espacio entre el nombre y el precio
+      }
+    }
+  }
+
+  mat-card-actions {
+    padding: 16px; // Padding consistente con Material Design
+    display: flex;
+    justify-content: flex-end; // Alinea el botón a la derecha
+  }
+}
+
+// Estilo para el encabezado (mat-toolbar) en la página del historial
+mat-toolbar {
+  background-color: $primary-color; // O un color que combine con tu navbar
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.8em; // Tamaño de fuente del título
+  font-weight: 500;
+  text-align: center; // Centra el texto del título
+  justify-content: center; // Centra el contenido de la toolbar
+  box-shadow: 0 2px 4px rgba(0, 0, 0, $shadow-strength);
+  margin-bottom: 20px;
+  border-radius: $card-border-radius; // Bordes redondeados como las tarjetas
+}
