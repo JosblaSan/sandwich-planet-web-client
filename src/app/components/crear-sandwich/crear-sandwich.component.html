@@ -1,0 +1,115 @@
+<div class="container mt-4">
+      <h2>{{ isEditMode ? 'Editar' : 'Crear' }} Sándwich</h2>
+      <form [formGroup]="sandwichForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre" class="form-control">
+          <div *ngIf="sandwichForm.get('nombre')?.invalid && sandwichForm.get('nombre')?.touched" class="text-danger">
+            El nombre es requerido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="origen" class="form-label">Origen</label>
+          <ng-select 
+            [items]="paises"
+            [searchable]="true"
+            [typeahead]="inputOrigen"
+            placeholder="Selecciona una opción"
+            formControlName="origenSeleccionado"
+            bindLabel="nombre"
+            bindValue="id">
+          </ng-select>
+          <div *ngIf="sandwichForm.get('origenSeleccionado')?.invalid && sandwichForm.get('origenSeleccionado')?.touched" class="text-danger">
+            El origen es requerido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="tipo" class="form-label">Tipo</label>
+          <ng-select 
+            [items]="tipos"
+            [searchable]="true"
+            [typeahead]="inputTipo"
+            placeholder="Selecciona una opción"
+            formControlName="tipoSeleccionado"
+            bindLabel="nombre"
+            bindValue="id">
+          </ng-select>
+          <div *ngIf="sandwichForm.get('tipoSeleccionado')?.invalid && sandwichForm.get('tipoSeleccionado')?.touched" class="text-danger">
+            El tipo es requerido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Ingredientes</label>
+          <div formArrayName="ingredientes">
+            <div *ngFor="let ingredienteControl of ingredientes.controls; let i = index" class="input-group mb-2">
+              <input type="text" [formControlName]="i" class="form-control">
+              <button type="button" class="btn btn-outline-danger" (click)="removeIngrediente(i)">X</button>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="addIngrediente()">Agregar Ingrediente</button>
+            <div *ngIf="ingredientes.invalid && ingredientes.touched" class="text-danger">
+              Debe haber al menos un ingrediente y no puede estar vacío.
+            </div>
+          </div>
+        </div>
+
+        <div formGroupName="atributos" class="mb-3 border p-3 rounded">
+          <h5 class="mb-3">Atributos</h5>
+          <div class="form-check">
+            <input type="checkbox" id="vegetariano" formControlName="vegetariano" class="form-check-input">
+            <label for="vegetariano" class="form-check-label">Vegetariano</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="vegano" formControlName="vegano" class="form-check-input">
+            <label for="vegano" class="form-check-label">Vegano</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="sin_gluten" formControlName="sin_gluten" class="form-check-input">
+            <label for="sin_gluten" class="form-check-label">Sin Gluten</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="picante" formControlName="picante" class="form-check-input">
+            <label for="picante" class="form-check-label">Picante</label>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="calorias_aproximadas" class="form-label">Calorías Aproximadas</label>
+          <input type="number" id="calorias_aproximadas" formControlName="calorias_aproximadas" class="form-control">
+          <div *ngIf="sandwichForm.get('calorias_aproximadas')?.invalid && sandwichForm.get('calorias_aproximadas')?.touched" class="text-danger">
+            Las calorías son requeridas y deben ser un número positivo.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio</label>
+          <input type="number" id="precio" formControlName="precio" class="form-control">
+          <div *ngIf="sandwichForm.get('precio')?.invalid && sandwichForm.get('precio')?.touched" class="text-danger">
+            El precio es requerido y debe ser un número positivo.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="disponible" class="form-label">Disponible</label>
+          <select id="disponible" formControlName="disponible" class="form-select">
+            <option [ngValue]="true">Sí</option>
+            <option [ngValue]="false">No</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="imagen_url" class="form-label">URL de la Imagen</label>
+          <input type="url" id="imagen_url" formControlName="imagen_url" class="form-control">
+          <div *ngIf="sandwichForm.get('imagen_url')?.invalid && sandwichForm.get('imagen_url')?.touched" class="text-danger">
+            La URL de la imagen es requerida y debe ser una URL válida.
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="sandwichForm.invalid" class="btn btn-success me-2">
+          {{ isEditMode ? 'Guardar Cambios' : 'Crear Sándwich' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Cancelar</button>
+      </form>
+    </div>

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     if (this.auth.isLoggedIn) {
       return true;
     } else {
-      window.location.href = "http://localhost:9000/login"; // Redirige al login si no está autenticado
+      window.location.href = "https://localhost:9000/login"; // Redirige al login si no está autenticado
       return false;
     }
   }

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-key ./ssl/key.pem --ssl-cert ./ssl/cert.pem",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.2.9",
+    "@ng-select/ng-select": "^14.9.0",
     "angular-oauth2-oidc": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

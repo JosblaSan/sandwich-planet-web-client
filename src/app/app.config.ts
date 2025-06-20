@@ -3,13 +3,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(OAuthModule.forRoot()), // <-- ¡Esto es lo que faltaba!
+    importProvidersFrom(OAuthModule.forRoot()),
     provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
   ]
 };
