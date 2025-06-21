@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators'; // Para simular un retardo de red
+import { delay } from 'rxjs/operators';
 
-// Define las interfaces para la estructura de tus datos de pedido
 export interface OrderItem {
   name: string;
   quantity: number;
   price: number;
+  imageUrl?: string;    
+  description?: string; 
 }
 
 export interface Order {
@@ -22,17 +23,21 @@ export interface Order {
 })
 export class OrderHistoryService {
 
-  // Datos simulados de pedidos
   private mockOrders: Order[] = [
     {
       id: 'SP001',
       date: new Date('2024-05-10T14:30:00'),
       status: 'Completado',
-      total: 15500,
+      total: 10000,
       items: [
-        { name: 'Sándwich Clásico', quantity: 2, price: 5000 },
-        { name: 'Papas Fritas Grandes', quantity: 1, price: 2500 },
-        { name: 'Bebida Lata', quantity: 2, price: 1500 }
+        { 
+          name: 'Sándwich Clásico', 
+          quantity: 2, 
+          price: 5000, 
+          imageUrl: 'https://www.watermelon.org/wp-content/uploads/2023/02/Sandwich_2023.jpg', // Ruta de tu imagen
+          description: 'El clásico sándwich americano con pavo, tocino, lechuga y tomate.' 
+        }
+
       ]
     },
     {
@@ -41,8 +46,20 @@ export class OrderHistoryService {
       status: 'Completado',
       total: 9000,
       items: [
-        { name: 'Sándwich Vegetariano', quantity: 1, price: 6000 },
-        { name: 'Jugo Natural', quantity: 1, price: 3000 }
+        { 
+          name: 'Sándwich Vegetariano', 
+          quantity: 1, 
+          price: 6000, 
+          imageUrl: 'assets/images/vegetable-sandwich.jpg', // Ruta de tu imagen
+          description: 'Delicioso sándwich con vegetales frescos y queso fundido.'
+        },
+        { 
+          name: 'Jugo Natural', 
+          quantity: 1, 
+          price: 3000,
+          imageUrl: 'assets/images/natural-juice.jpg', // Otra imagen de ejemplo
+          description: 'Jugo de frutas 100% natural.'
+        }
       ]
     },
     {
@@ -51,7 +68,13 @@ export class OrderHistoryService {
       status: 'En Proceso',
       total: 12000,
       items: [
-        { name: 'Combo Familiar', quantity: 1, price: 12000 }
+        { 
+          name: 'Combo Familiar', 
+          quantity: 1, 
+          price: 12000,
+          imageUrl: 'assets/images/family-combo.jpg',
+          description: 'Ideal para compartir, incluye 2 sándwiches y 2 bebidas.'
+        }
       ]
     },
     {
@@ -60,7 +83,13 @@ export class OrderHistoryService {
       status: 'Cancelado',
       total: 7500,
       items: [
-        { name: 'Sándwich de Pollo', quantity: 1, price: 7500 }
+        { 
+          name: 'Sándwich de Pollo', 
+          quantity: 1, 
+          price: 7500,
+          imageUrl: 'assets/images/chicken-sandwich.jpg',
+          description: 'Tiernas tiras de pollo a la plancha con aderezos.'
+        }
       ]
     },
     {
@@ -69,22 +98,27 @@ export class OrderHistoryService {
       status: 'Pendiente',
       total: 8500,
       items: [
-        { name: 'Sándwich de Carne Mechada', quantity: 1, price: 7000 },
-        { name: 'Agua Mineral', quantity: 1, price: 1500 }
+        { 
+          name: 'Sándwich de Carne Mechada', 
+          quantity: 1, 
+          price: 7000,
+          imageUrl: 'assets/images/pulled-pork-sandwich.jpg',
+          description: 'Exquisita carne mechada en pan frica con mayonesa casera.'
+        },
+        { 
+          name: 'Agua Mineral', 
+          quantity: 1, 
+          price: 1500,
+          imageUrl: 'assets/images/water-bottle.jpg',
+          description: 'Botella de agua mineral con o sin gas.'
+        }
       ]
     },
   ];
 
   constructor() { }
 
-  /**
-   * Simula la obtención del historial de pedidos de un usuario.
-   * En una aplicación real, aquí harías una llamada HTTP.
-   * @returns Un Observable de un array de pedidos.
-   */
   getOrders(): Observable<Order[]> {
-    // Retornamos un Observable de los pedidos simulados con un pequeño retraso
-    // para simular una llamada de red.
     return of(this.mockOrders).pipe(delay(1000));
   }
 }

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Detalles del Pedido</h2>
+
+<mat-dialog-content>
+  <div class="detail-content">
+    <div class="image-container">
+      <img [src]="data.item.imageUrl || 'assets/images/placeholder-sandwich.jpg'" 
+           [alt]="data.item.name" 
+           class="item-image">
+    </div>
+    <div class="info-container">
+      <h3>{{ data.item.name }}</h3>
+      <p>Cantidad: <strong>{{ data.item.quantity }}</strong></p>
+      <p>Precio Unitario: <strong>{{ data.item.price | currency:'CLP':'symbol':'1.0-0' }}</strong></p>
+      <p>Subtotal: <strong>{{ (data.item.quantity * data.item.price) | currency:'CLP':'symbol':'1.0-0' }}</strong></p>
+      <p *ngIf="data.item.description">Descripción: {{ data.item.description }}</p>
+      <mat-divider></mat-divider>
+      <p class="order-info">Pedido ID: {{ data.orderId }}</p>
+      <p class="order-info">Fecha del Pedido: {{ data.orderDate | date:'short' }}</p>
+      <p class="order-info">Estado del Pedido: <strong>{{ data.orderStatus }}</strong></p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Cerrar</button>
+</mat-dialog-actions>

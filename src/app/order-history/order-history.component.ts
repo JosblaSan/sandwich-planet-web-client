@@ -6,7 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { HttpClientModule } from '@angular/common/http';
-import { OrderHistoryService, Order } from '../services/order-history.service';
+import { OrderHistoryService, Order, OrderItem } from '../services/order-history.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { OrderDetailDialogComponent, OrderDetailDialogData } from '../order-detail-dialog/order-detail-dialog.component';
 
 @Component({
   selector: 'app-order-history',
@@ -17,6 +19,7 @@ import { OrderHistoryService, Order } from '../services/order-history.service';
     MatListModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     MatToolbarModule
   ],
   templateUrl: './order-history.component.html',
@@ -27,7 +30,10 @@ export class OrderHistoryComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private orderHistoryService: OrderHistoryService) { }
+  constructor(
+    private orderHistoryService: OrderHistoryService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.loadOrderHistory();
@@ -49,7 +55,25 @@ export class OrderHistoryComponent implements OnInit {
     });
   }
 
-  viewOrderDetails(orderId: string): void {
-    console.log(`Ver detalles del pedido: ${orderId}`);
+ // Modifica viewOrderDetails para abrir el diálogo
+  viewOrderDetails(orderId: string, item: OrderItem): void {
+    // Encuentra el pedido completo para pasarle el estado y fecha
+    const order = this.orders.find(o => o.id === orderId);
+    if (!order) {
+      console.warn(`Pedido con ID ${orderId} no encontrado.`);
+      return;
+    }
+
+    const dialogData: OrderDetailDialogData = {
+      orderId: order.id,
+      item: item, // Pasa el ítem completo, incluyendo las nuevas propiedades
+      orderDate: order.date,
+      orderStatus: order.status
+    };
+
+    this.dialog.open(OrderDetailDialogComponent, {
+      width: '450px', // Ancho del diálogo
+      data: dialogData // Pasa los datos al diálogo
+    });
   }
 }

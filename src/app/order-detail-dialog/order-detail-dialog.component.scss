@@ -1,0 +1,73 @@
+.mat-dialog-title {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+  color: #333;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column; /* Por defecto para móviles, luego a fila */
+  gap: 20px;
+  padding: 20px 0;
+}
+
+@media (min-width: 600px) { /* Para pantallas más grandes */
+  .detail-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.image-container {
+  flex-shrink: 0; /* No encoger la imagen */
+  width: 100%;
+  max-width: 250px; /* Tamaño máximo para la imagen */
+  text-align: center; /* Centrar la imagen si es más pequeña */
+  border-radius: 8px;
+  overflow: hidden; /* Para que la imagen respete el border-radius */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.item-image {
+  width: 100%;
+  height: auto;
+  display: block; /* Elimina espacio extra debajo de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+}
+
+.info-container {
+  flex-grow: 1; /* Permitir que el texto ocupe el espacio restante */
+}
+
+.info-container h3 {
+  font-size: 1.6em;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #ff6600; /* Color principal para el nombre del sándwich */
+}
+
+.info-container p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.info-container strong {
+  color: #333;
+}
+
+mat-divider {
+  margin: 15px 0;
+}
+
+.order-info {
+  font-size: 0.9em;
+  color: #777;
+}
+
+mat-dialog-actions {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
