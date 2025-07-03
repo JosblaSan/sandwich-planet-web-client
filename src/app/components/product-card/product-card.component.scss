@@ -13,6 +13,8 @@ $vegan-color: #8bc34a; // Verde claro
 $gluten-free-color: #ffc107; // Amarillo
 $spicy-color: #f44336; // Rojo
 
+@use 'sass:color';
+
 /* Mixins (opcional, para reutilizar estilos) */
 @mixin card-shadow {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -43,7 +45,7 @@ $spicy-color: #f44336; // Rojo
 
   .error-message {
     color: $error-color;
-    background-color: lighten($error-color, 40%);
+    background-color: color.adjust($error-color, $lightness: 40%);
     border: 1px solid $error-color;
     padding: 15px;
     margin: 20px auto;
@@ -66,7 +68,7 @@ $spicy-color: #f44336; // Rojo
   background-color: $card-background;
   border-radius: 12px;
   overflow: hidden;
-  @include card-shadow; // Aplica la sombra
+  @include card-shadow;
   padding: 25px;
   display: flex;
   flex-direction: column;
@@ -74,14 +76,14 @@ $spicy-color: #f44336; // Rojo
   text-align: center;
 
   &:hover {
-    transform: translateY(-8px); // Efecto al pasar el ratón
+    transform: translateY(-8px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
   .sandwich-image {
     width: 100%;
     max-height: 200px;
-    object-fit: cover; // Para que la imagen cubra el espacio sin distorsionarse
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
   }
@@ -152,17 +154,16 @@ $spicy-color: #f44336; // Rojo
     margin-top: 15px;
     padding: 8px 15px;
     border-radius: 5px;
-    background-color: #cccccc; // Gris por defecto para agotado
+    background-color: #cccccc;
     color: #333333;
 
     &.available {
-      background-color: #c8e6c9; // Verde claro
-      color: #2e7d32; // Verde oscuro
+      background-color: #c8e6c9;
+      color: #2e7d32;
     }
   }
 }
 
-/* Media Queries para responsividad */
 @media (max-width: 768px) {
   .sandwich-container {
     padding: 15px;
@@ -174,7 +175,7 @@ $spicy-color: #f44336; // Rojo
   }
 
   .sandwich-grid {
-    grid-template-columns: 1fr; // Una columna en pantallas pequeñas
+    grid-template-columns: 1fr;
     padding: 10px;
   }
 

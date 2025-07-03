@@ -127,7 +127,7 @@ export class MantenedorComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.verificarRol();
+    this.authService.verificarRol('edit/:id', ['ROLE_admin']);
     this.initForm();
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');

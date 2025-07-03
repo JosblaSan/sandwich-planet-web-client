@@ -11,13 +11,13 @@
   
       <div class="navbar-content" [class.mobile-open]="isMobileMenuOpen">
     <div class="navbar-links">
-      <a mat-button routerLink="/menu" routerLinkActive="active-link"
+      <a mat-button routerLink="/" routerLinkActive="active-link"
          (mouseenter)="setActiveLink('menu')" (mouseleave)="clearActiveLink()"
          [class.hovered]="activeLink === 'menu'">
         <div class="link-content">
           <span>Menú</span>
           <div class="link-image" *ngIf="activeLink === 'menu'">
-            <img src="assets/images/menu-preview.jpg" alt="Menú Preview">
+            <img src="images/menu-preview.png" alt="Menú Preview">
           </div>
         </div>
       </a>
@@ -28,7 +28,7 @@
         <div class="link-content">
           <span>Ubicaciones</span>
           <div class="link-image" *ngIf="activeLink === 'locations'">
-            <img src="assets/images/locations-preview.jpg" alt="Ubicaciones Preview">
+            <img src="images/ubicaciones-preview.png" alt="Ubicaciones Preview">
           </div>
         </div>
       </a>
@@ -39,7 +39,7 @@
         <div class="link-content">
           <span>Nosotros</span>
           <div class="link-image" *ngIf="activeLink === 'about'">
-            <img src="assets/images/about-preview.jpg" alt="Nosotros Preview">
+            <img src="images/nosotros-preview.png" alt="Nosotros Preview">
           </div>
         </div>
       </a>
@@ -56,6 +56,14 @@
         (click)="openCart()">
         <mat-icon>shopping_cart</mat-icon>
       </button>
+
+      <button
+          *ngIf="!isLoggedIn"
+          mat-button
+          class="register-button"
+          routerLink="/registro">
+          Registro
+        </button>
 
       <button 
         *ngIf="!isLoggedIn" 
@@ -94,6 +102,11 @@
           <mat-icon>receipt</mat-icon>
           <span>Mis Pedidos</span>
         </button>
+        <mat-divider></mat-divider>
+        <a mat-menu-item routerLink="/order-history">
+            <mat-icon>history</mat-icon>
+            <span>Historial de Pedidos</span>
+        </a>
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>

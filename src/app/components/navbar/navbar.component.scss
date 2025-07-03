@@ -290,3 +290,25 @@ $transition-speed: 0.3s;
 .active-link {
   font-weight: 500 !important;
 }
+
+.register-button {
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    border-radius: 20px;
+    padding: 0 30px;
+    height: 36px;
+    background-color: #616161;
+    color: white;
+    transition: background-color $transition-speed ease, transform $transition-speed ease;
+
+    margin-right: 12px;
+
+    &:hover {
+      background-color: color.adjust(#616161, $lightness: -5%);
+      transform: translateY(-2px);
+    }
+
+    @include responsive(mobile) {
+      width: 100%;
+    }
+  }

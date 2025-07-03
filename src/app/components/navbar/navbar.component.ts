@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../../services/cart/cart.service';
 import { MatBadgeModule } from '@angular/material/badge';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDividerModule, 
     CommonModule,
     MatBadgeModule,
+    RouterModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',

@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@ng-select/ng-select/themes/default.theme.css";
+@use 'sass:color';
+@use "@ng-select/ng-select/themes/default.theme.css";
 /* o el tema material */
-@import "@ng-select/ng-select/themes/material.theme.css";
+// @use "@ng-select/ng-select/themes/material.theme.css";
 
 html,
 body {
@@ -31,13 +32,11 @@ $font-family-base: 'Arial', sans-serif;
 $card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $border-radius: 0.25rem;
 
-
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 body {
   font-family: $font-family-base;
@@ -79,8 +78,8 @@ h6 {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &:hover {
-    background-color: darken($primary-color, 10%);
-    border-color: darken($primary-color, 12%);
+    background-color: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -12%);
   }
 }
 
@@ -89,8 +88,8 @@ h6 {
   border-color: $primary-color;
 
   &:hover {
-    background-color: darken($primary-color, 10%);
-    border-color: darken($primary-color, 12%);
+    background-color: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -12%);
   }
 }
 
@@ -99,8 +98,8 @@ h6 {
   border-color: $success-color;
 
   &:hover {
-    background-color: darken($success-color, 10%);
-    border-color: darken($success-color, 12%);
+    background-color: color.adjust($success-color, $lightness: -10%);
+    border-color: color.adjust($success-color, $lightness: -12%);
   }
 }
 
@@ -110,8 +109,8 @@ h6 {
   color: #212529;
 
   &:hover {
-    background-color: darken($warning-color, 10%);
-    border-color: darken($warning-color, 12%);
+    background-color: color.adjust($warning-color, $lightness: -10%);
+    border-color: color.adjust($warning-color, $lightness: -12%);
   }
 }
 
@@ -120,8 +119,8 @@ h6 {
   border-color: $danger-color;
 
   &:hover {
-    background-color: darken($danger-color, 10%);
-    border-color: darken($danger-color, 12%);
+    background-color: color.adjust($danger-color, $lightness: -10%);
+    border-color: color.adjust($danger-color, $lightness: -12%);
   }
 }
 
@@ -130,8 +129,8 @@ h6 {
   border-color: $secondary-color;
 
   &:hover {
-    background-color: darken($secondary-color, 10%);
-    border-color: darken($secondary-color, 12%);
+    background-color: color.adjust($secondary-color, $lightness: -10%);
+    border-color: color.adjust($secondary-color, $lightness: -12%);
   }
 }
 
@@ -166,25 +165,25 @@ h6 {
   margin-left: -15px;
 }
 
-.row>* {
+.row > * {
   padding-right: 15px;
   padding-left: 15px;
   margin-bottom: 15px;
 }
 
-.row-cols-1>* {
+.row-cols-1 > * {
   flex: 0 0 auto;
   width: 100%;
 }
 
-.row-cols-md-2>* {
+.row-cols-md-2 > * {
   @media (min-width: 768px) {
     flex: 0 0 auto;
     width: 50%;
   }
 }
 
-.row-cols-lg-3>* {
+.row-cols-lg-3 > * {
   @media (min-width: 992px) {
     flex: 0 0 auto;
     width: 33.333333%;
@@ -195,7 +194,6 @@ h6 {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 1.5rem;
 }
-
 
 .card {
   position: relative;
@@ -237,3 +235,11 @@ h6 {
     margin-bottom: 0.5rem;
   }
 }
+
+input.invalid,
+select.invalid,
+.ng-select.invalid {
+  border: 1px solid #dc3545;
+  background-color: #fff5f5;
+}
+

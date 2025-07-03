@@ -4,7 +4,7 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
 export const authCodeFlowConfig: AuthConfig = {
   issuer: 'https://localhost:9000', // tu Spring Auth Server
-  requireHttps: false, 
+  requireHttps: false,
   redirectUri: 'https://localhost:4200/callback',
   clientId: 'client-app',
   responseType: 'code',
@@ -20,6 +20,7 @@ export const authCodeFlowConfig: AuthConfig = {
 export class AuthService {
   constructor(private oauthService: OAuthService, private router: Router) {
     this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.setStorage(sessionStorage);
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
     this.oauthService.setupAutomaticSilentRefresh();
   }
@@ -43,31 +44,42 @@ export class AuthService {
   loadDiscoveryDocumentAndTryLogin(callback: () => void) {
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       callback();
-      }).catch((error) => {
-        console.log(error)
-      });
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
   getAccessToken() {
     return this.oauthService.getAccessToken();
   }
 
-  verificarRol(){
+  verificarRol(rutaDeseada: string, rolesPermitidos: string[] = []): void {
     const accessToken = this.getAccessToken();
-        if (!accessToken) {
-          console.error('No hay access token');
-          return;
-        }
-        // Decodifica el payload del Access Token (sin verificar firma)
-        const payloadBase64 = accessToken.split('.')[1];
-        const payloadJson = atob(payloadBase64);
-        const payload = JSON.parse(payloadJson);
-        // Redirige a la ruta protegida o página principal
-        if (payload.roles.includes('ROLE_read')) {
-          this.router.navigate(['/']); // redirige a la página principal
-          return;
-        }
+    if (!accessToken) {
+      console.error('No hay access token');
+      this.router.navigate(['/login']);
+      return;
+    }
 
-        this.router.navigate(['/dashboard']); // si el rol no es 'ROLE_read', redirige al dashboard
+    try {
+      const payloadBase64 = accessToken.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson);
+
+      const rolesUsuario: string[] = payload.roles || [];
+
+      const tienePermiso = rolesPermitidos.length === 0 || rolesUsuario.some(rol => rolesPermitidos.includes(rol));
+
+      if (tienePermiso) {
+        this.router.navigate([rutaDeseada]);
+      } else {
+        this.router.navigate(['/']); // o alguna ruta de acceso denegado
+      }
+
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      this.router.navigate(['/']);
+    }
   }
+
 }

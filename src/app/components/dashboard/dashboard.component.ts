@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.authService.verificarRol();
+    this.authService.verificarRol('/dashboard', ['ROLE_admin']);
     this.sandwichService.listarSandwiches().subscribe(data => this.sandwiches = data);
   }
 

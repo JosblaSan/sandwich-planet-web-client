@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 mb-4">
+      <mat-card class="shadow rounded-4 p-3">
+        <div class="d-flex align-items-center mb-3">
+          <mat-icon class="me-2" style="font-size: 2rem; color: #43A047;">location_on</mat-icon>
+          <h2 class="mb-0" style="color: #43A047;">Nuestras Ubicaciones</h2>
+        </div>
+        <div *ngFor="let ubicacion of ubicaciones" class="mb-3">
+          <button
+            class="btn btn-outline-primary w-100 text-start mb-2"
+            [class.active]="ubicacion === selectedUbicacion"
+            (click)="selectUbicacion(ubicacion)">
+            <mat-icon>place</mat-icon>
+            <span class="fw-bold">{{ ubicacion.nombre }}</span>
+            <br>
+            <span class="small">{{ ubicacion.direccion }}</span>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-lg-7 mb-4">
+      <mat-card class="shadow rounded-4 p-0" style="overflow: hidden;">
+        <google-map
+          height="400px"
+          width="100%"
+          [center]="center"
+          [zoom]="zoom">
+          <map-marker
+            *ngFor="let ubicacion of ubicaciones"
+            [position]="{ lat: ubicacion.lat, lng: ubicacion.lng }"
+            [title]="ubicacion.nombre"
+            [label]="ubicacion.nombre[0]"
+            [icon]="ubicacion === selectedUbicacion ? { url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' } : '' ">
+          </map-marker>
+        </google-map>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -42,10 +42,10 @@ export class UserControllerService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<UsuarioRespuestaDTO>;
-    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<UsuarioRespuestaDTO>>;
-    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<UsuarioRespuestaDTO>>;
-    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'Application/json', context?: HttpContext, transferCache?: boolean}): Observable<UsuarioRespuestaDTO>;
+    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'Application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<UsuarioRespuestaDTO>>;
+    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'Application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<UsuarioRespuestaDTO>>;
+    public registrarUsuario(usuarioCreacionDTO: UsuarioCreacionDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'Application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (usuarioCreacionDTO === null || usuarioCreacionDTO === undefined) {
             throw new Error('Required parameter usuarioCreacionDTO was null or undefined when calling registrarUsuario.');
         }
@@ -53,7 +53,7 @@ export class UserControllerService extends BaseService {
         let localVarHeaders = this.defaultHeaders;
 
         const localVarHttpHeaderAcceptSelected: string | undefined = options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept([
-            '*/*'
+            'Application/json'
         ]);
         if (localVarHttpHeaderAcceptSelected !== undefined) {
             localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);

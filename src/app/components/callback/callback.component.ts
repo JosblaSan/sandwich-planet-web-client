@@ -19,7 +19,7 @@ export class CallbackComponent {
         window.location.href = "https://localhost:9000/login";
         return;
       }
-        this.auth.verificarRol();
+        this.auth.verificarRol('/dashboard', ['ROLE_admin']);
       } 
     );
   }
